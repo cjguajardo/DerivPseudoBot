@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, memo } from 'react';
 import { View, Text, Dimensions, Pressable } from 'react-native';
 import OverlapElementsContext from '../../contexts/OverlapElementsContext';
 
@@ -48,4 +48,4 @@ const styles = {
   },
 };
 
-export default Toast;
+export default memo(Toast);

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import WebSocketContext from '../contexts/WebSocketContext';
 import StockInfo from '../components/StockInfo';
 import { determineTrend } from '../utils/ChartFunctions';
 // import { LineChart } from 'react-native-chart-kit';
-import { CandlestickChart, LineChart } from 'react-native-wagmi-charts';
+import { CandlestickChart } from 'react-native-wagmi-charts';
 import ws from '../services/DerivWebSocket';
 import OverlapElementsContext from '../contexts/OverlapElementsContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -58,7 +58,7 @@ const SelectedStockScreen = ({ children }) => {
     const stocks = await AsyncStorage.getItem('stocks');
     const _stocks = JSON.parse(stocks);
     const _selectedStock = _stocks.find(
-      stock => stock.symbol === selectedSymbol
+      (stock) => stock.symbol === selectedSymbol
     );
 
     setSelectedStock(_selectedStock);
@@ -210,7 +210,7 @@ const SelectedStockScreen = ({ children }) => {
       getHistory();
     };
 
-    socket.onmessage = async e => {
+    socket.onmessage = async (e) => {
       const data = JSON.parse(e.data);
       if (data) {
         // console.log({ data });
@@ -280,7 +280,7 @@ const SelectedStockScreen = ({ children }) => {
           }
 
           const candleIndex = _candleChartData.findIndex(
-            candle => candle.timestamp === data.ohlc.epoch
+            (candle) => candle.timestamp === data.ohlc.epoch
           );
 
           if (candleIndex === -1) {
@@ -305,7 +305,7 @@ const SelectedStockScreen = ({ children }) => {
             }
           }
 
-          const _history = _candleChartData.map(candle => candle.close);
+          const _history = _candleChartData.map((candle) => candle.close);
 
           setCandleChartData(_candleChartData);
           setStockHistory(_history);

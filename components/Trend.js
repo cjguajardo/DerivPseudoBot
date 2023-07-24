@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { memo } from 'react';
+import { Text } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const Trend = ({ trend, percentaje = null, size = 'md', price = null }) => {
@@ -54,4 +54,4 @@ const Trend = ({ trend, percentaje = null, size = 'md', price = null }) => {
   );
 };
 
-export default Trend;
+export default memo(Trend);

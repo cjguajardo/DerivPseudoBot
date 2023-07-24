@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, memo } from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import OverlapElementsContext from '../../contexts/OverlapElementsContext';
 
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Loader;
+export default memo(Loader);

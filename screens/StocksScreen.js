@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
-import { Button, View, Text, FlatList, Pressable } from 'react-native';
+import { Button, View, FlatList, Pressable } from 'react-native';
 import PropTypes from 'prop-types';
 import StockInfo from '../components/StockInfo';
 import ws from '../services/DerivWebSocket';
@@ -29,12 +29,12 @@ const StocksScreen = ({ onStockSelection }) => {
       }, 500);
     };
 
-    socket.onmessage = e => {
+    socket.onmessage = (e) => {
       const data = JSON.parse(e.data);
       if (data) {
         if (data.msg_type === 'active_symbols') {
           const only_open_markets = data.active_symbols.filter(
-            stock => stock.exchange_is_open == 1
+            (stock) => stock.exchange_is_open == 1
           );
           setStockList(only_open_markets);
           AsyncStorage.setItem('stocks', JSON.stringify(data.active_symbols));
@@ -63,4 +63,4 @@ StocksScreen.propTypes = {
   onStockSelection: PropTypes.func.isRequired,
 };
 
-export default memo(StocksScreen);
+export default StocksScreen;

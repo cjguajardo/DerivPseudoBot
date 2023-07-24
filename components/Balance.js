@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { View, Text } from 'react-native';
 import ws from '../services/DerivWebSocket';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -14,7 +14,7 @@ const Balance = () => {
       socket.send(JSON.stringify({ authorize: ws.botToken }));
     };
 
-    socket.onmessage = e => {
+    socket.onmessage = (e) => {
       const data = JSON.parse(e.data);
       if (data) {
         if (data.msg_type === 'authorize') {
@@ -41,4 +41,4 @@ const Balance = () => {
   );
 };
 
-export default Balance;
+export default memo(Balance);

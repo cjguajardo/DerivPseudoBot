@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getFormatedDate } from '../utils/DateFunctions';
 import OverlapElementsContext from '../contexts/OverlapElementsContext';
 
-const OpenContract = ({ takeProfitAt = null }) => {
+const OpenContract = () => {
   const socket = ws.openSocket();
   const { toast } = useContext(OverlapElementsContext);
   // const { selectedSymbol } = useContext(WebSocketContext);
@@ -56,7 +56,7 @@ const OpenContract = ({ takeProfitAt = null }) => {
       );
     };
 
-    socket.onmessage = e => {
+    socket.onmessage = (e) => {
       const data = JSON.parse(e.data);
       if (data) {
         if (data.msg_type === 'authorize') {
@@ -118,7 +118,7 @@ const OpenContract = ({ takeProfitAt = null }) => {
       }
     };
 
-    AsyncStorage.getItem('currency').then(value => {
+    AsyncStorage.getItem('currency').then((value) => {
       setCurrency(value);
     });
   }, []);
